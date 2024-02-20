@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="context" prefHeight="438.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.SignUpFormController">
+   <children>
+      <Label layoutX="151.0" layoutY="51.0" text="Robotikka" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="74.0" layoutY="123.0" prefHeight="31.0" prefWidth="268.0" promptText="Email">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="74.0" layoutY="188.0" prefHeight="31.0" prefWidth="268.0" promptText="Password">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton layoutX="84.0" layoutY="259.0" onAction="#btnRegisterNowOnAction" prefHeight="31.0" prefWidth="249.0" style="-fx-background-color: #40739e;" text="Register Now" textFill="#fcf7f7">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="84.0" layoutY="349.0" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="249.0" style="-fx-background-color: #353b48;" text="Already have an account" textFill="#fcf7f7">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="193.0" layoutY="311.0" prefHeight="25.0" prefWidth="48.0" text="OR" textFill="#1c1d1e">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
