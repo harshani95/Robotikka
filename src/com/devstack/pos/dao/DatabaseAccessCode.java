@@ -1,13 +1,16 @@
 package com.devstack.pos.dao;
 
+import com.devstack.pos.dto.Customer;
 import com.devstack.pos.dto.UserDto;
 import com.devstack.pos.util.PasswordManager;
 
 import java.sql.*;
+import java.util.List;
 
 public class DatabaseAccessCode {
 
     //========user management==========//
+
     public static boolean createUser(
             String email,
             String password
@@ -37,11 +40,31 @@ public class DatabaseAccessCode {
         }
         return null;
     }
+
     //========user management==========//
 
 
     //========customer management==========//
-   // public static boolean createCustomer(){}
+
+    public static boolean createCustomer(String email, String name, String contact, double salary){
+        return false;
+    }
+
+    public static boolean updateCustomer(String email, String name, String contact, double salary){
+        return false;
+    }
+
+    public static Customer findCustomer(String email){
+        return null;
+    }
+
+    public static List<Customer> findAllCustomers(){
+        return null;
+    }
+
+    public static boolean searchCustomer(String searchText){
+        return false;
+    }
 
     //========customer management==========//
 }
