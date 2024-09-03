@@ -46,8 +46,17 @@ public class DatabaseAccessCode {
 
     //========customer management==========//
 
-    public static boolean createCustomer(String email, String name, String contact, double salary){
-        return false;
+    public static boolean createCustomer(String email, String name, String contact, double salary) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/robotikka",
+                "root","1218");
+        String sql="INSERT INTO customer VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, name);
+        preparedStatement.setString(3, contact);
+        preparedStatement.setDouble(4, salary);
+        return preparedStatement.executeUpdate()>0;
     }
 
     public static boolean updateCustomer(String email, String name, String contact, double salary){
