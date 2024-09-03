@@ -91,7 +91,7 @@ public class CustomerFormController {
                 try{
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure?", ButtonType.YES,ButtonType.NO);
                     Optional<ButtonType> selectedButtonType = alert.showAndWait();
-                    if (selectedButtonType.equals(ButtonType.YES)){
+                    if (selectedButtonType.get().equals(ButtonType.YES)){
                         if (DatabaseAccessCode.deleteCustomer(dto.getEmail())){
                             new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted!").show();
                             loadAllCustomers(searchText);

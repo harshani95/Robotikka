@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="contextCustomer" prefHeight="520.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.CustomerFormController">
+<AnchorPane fx:id="contextCustomer" prefHeight="520.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.CustomerFormController">
    <children>
       <Label layoutX="24.0" layoutY="22.0" prefHeight="35.0" prefWidth="277.0" text="Customer Management" textFill="#30336b">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Separator layoutX="29.0" layoutY="59.0" prefHeight="17.0" prefWidth="686.0" />
-      <JFXButton layoutX="599.0" layoutY="30.0" onAction="#btnBackToHomeOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
+      <Separator layoutX="29.0" layoutY="59.0" prefHeight="17.0" prefWidth="736.0" />
+      <JFXButton layoutX="648.0" layoutY="30.0" onAction="#btnBackToHomeOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -27,7 +27,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="311.0" layoutY="30.0" onAction="#btnManageLoyaltyCardsOnAction" style="-fx-background-color: #cf6a87;" text="Manage Loyalty Cards">
+      <JFXButton layoutX="360.0" layoutY="30.0" onAction="#btnManageLoyaltyCardsOnAction" style="-fx-background-color: #cf6a87;" text="Manage Loyalty Cards">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -35,7 +35,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="472.0" layoutY="30.0" onAction="#btnNewCustomerOnAction" style="-fx-background-color: #0fb9b1;" text="+New Customer" textFill="#252424">
+      <JFXButton layoutX="521.0" layoutY="30.0" onAction="#btnNewCustomerOnAction" style="-fx-background-color: #0fb9b1;" text="+New Customer" textFill="#252424">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -71,7 +71,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TableView fx:id="tblCustomer" layoutX="24.0" layoutY="260.0" prefHeight="241.0" prefWidth="697.0">
+      <TableView fx:id="tblCustomer" layoutX="24.0" layoutY="260.0" prefHeight="241.0" prefWidth="736.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colEmail" prefWidth="124.0" text="Email" />
