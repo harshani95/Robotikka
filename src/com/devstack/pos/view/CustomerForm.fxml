@@ -11,16 +11,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="contextCustomer" prefHeight="487.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.CustomerFormController">
+<AnchorPane fx:id="contextCustomer" prefHeight="520.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.CustomerFormController">
    <children>
-      <Label layoutX="28.0" layoutY="23.0" prefHeight="25.0" prefWidth="201.0" text="Customer Management">
+      <Label layoutX="24.0" layoutY="22.0" prefHeight="35.0" prefWidth="277.0" text="Customer Management" textFill="#30336b">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Separator layoutX="29.0" layoutY="59.0" prefHeight="3.0" prefWidth="615.0" />
-      <JFXButton layoutX="266.0" layoutY="23.0" onAction="#btnBackToHomeOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
+      <Separator layoutX="29.0" layoutY="59.0" prefHeight="17.0" prefWidth="686.0" />
+      <JFXButton layoutX="599.0" layoutY="30.0" onAction="#btnBackToHomeOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -28,7 +27,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="386.0" layoutY="23.0" onAction="#btnManageLoyaltyCardsOnAction" style="-fx-background-color: #cf6a87;" text="Manage Loyalty Cards">
+      <JFXButton layoutX="311.0" layoutY="30.0" onAction="#btnManageLoyaltyCardsOnAction" style="-fx-background-color: #cf6a87;" text="Manage Loyalty Cards">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -36,7 +35,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="545.0" layoutY="23.0" onAction="#btnNewCustomerOnAction" style="-fx-background-color: #0fb9b1;" text="+New Customer" textFill="#252424">
+      <JFXButton layoutX="472.0" layoutY="30.0" onAction="#btnNewCustomerOnAction" style="-fx-background-color: #0fb9b1;" text="+New Customer" textFill="#252424">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -44,27 +43,27 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="29.0" layoutY="84.0" prefHeight="29.0" prefWidth="201.0" promptText="Email">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="29.0" layoutY="87.0" prefHeight="29.0" prefWidth="188.0" promptText="Email">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtSalary" labelFloat="true" layoutX="28.0" layoutY="133.0" prefHeight="25.0" prefWidth="201.0" promptText="Salary">
+      <JFXTextField fx:id="txtSalary" labelFloat="true" layoutX="28.0" layoutY="136.0" prefHeight="29.0" prefWidth="188.0" promptText="Salary">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="477.0" layoutY="83.0" prefHeight="29.0" prefWidth="177.0" promptText="Contact">
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="477.0" layoutY="86.0" prefHeight="29.0" prefWidth="172.0" promptText="Contact">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="260.0" layoutY="83.0" prefHeight="29.0" prefWidth="188.0" promptText="Name">
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="260.0" layoutY="86.0" prefHeight="29.0" prefWidth="188.0" promptText="Name">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnSaveUpdate" layoutX="442.0" layoutY="139.0" onAction="#btnSaveUpdateOnAction" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: #4b6584;" text="Save Customer" textFill="#f5ecec">
+      <JFXButton fx:id="btnSaveUpdate" layoutX="339.0" layoutY="140.0" onAction="#btnSaveUpdateOnAction" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: #4b6584;" text="Save Customer" textFill="#f5ecec">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -72,16 +71,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TableView fx:id="tblCustomer" layoutX="25.0" layoutY="228.0" prefHeight="241.0" prefWidth="638.0">
+      <TableView fx:id="tblCustomer" layoutX="24.0" layoutY="260.0" prefHeight="241.0" prefWidth="697.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="75.0" text="#" />
+          <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colEmail" prefWidth="124.0" text="Email" />
-            <TableColumn fx:id="colName" prefWidth="125.0" text="Name" />
-            <TableColumn fx:id="colContact" prefWidth="106.0" text="Contact" />
-            <TableColumn fx:id="colSalary" prefWidth="103.0" text="Salary" />
-            <TableColumn fx:id="colOperate" prefWidth="104.0" text="Operate" />
+            <TableColumn fx:id="colName" prefWidth="141.0" text="Name" />
+            <TableColumn fx:id="colContact" prefWidth="112.0" text="Contact" />
+            <TableColumn fx:id="colSalary" prefWidth="115.0" text="Salary" />
+            <TableColumn fx:id="colOperate" prefWidth="128.0" text="Operate" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearch" layoutX="29.0" layoutY="189.0" prefHeight="25.0" prefWidth="626.0" promptText="Search here" />
+      <TextField fx:id="txtSearch" layoutX="25.0" layoutY="216.0" prefHeight="25.0" prefWidth="697.0" promptText="Search here" />
    </children>
 </AnchorPane>

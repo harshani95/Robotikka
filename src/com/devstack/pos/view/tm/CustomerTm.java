@@ -1,18 +1,33 @@
-package com.devstack.pos.dto;
+package com.devstack.pos.view.tm;
 
-public class Customer {
+import javafx.scene.control.Button;
+
+public class CustomerTm {
+    private int id;
     private String email;
     private String name;
     private String contact;
+    private double salary;
+    private Button deleteButton;
 
-    public Customer() {
+    public CustomerTm() {
     }
 
-    public Customer(String email, String name, String contact, double salary) {
+    public CustomerTm(int id, String email, String name, String contact, double salary, Button deleteButton) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.contact = contact;
         this.salary = salary;
+        this.deleteButton = deleteButton;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -47,6 +62,11 @@ public class Customer {
         this.salary = salary;
     }
 
-    private double salary;
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
 
+    public void setDeleteButton(Button deleteButton) {
+        this.deleteButton = deleteButton;
+    }
 }
