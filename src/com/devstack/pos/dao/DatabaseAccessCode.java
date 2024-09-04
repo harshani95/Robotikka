@@ -84,42 +84,66 @@ public class DatabaseAccessCode {
     }
 
     public static List<CustomerDto> findAllCustomers() throws SQLException, ClassNotFoundException {
-            String sql = "SELECT * FROM customer";
-            PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        String sql = "SELECT * FROM customer";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<CustomerDto> dtos = new ArrayList<>();
-            while (resultSet.next()) {
-                dtos.add(new CustomerDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getDouble(4)
-                ));
-            }
-            return dtos;
+        List<CustomerDto> dtos = new ArrayList<>();
+        while (resultSet.next()) {
+            dtos.add(new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDouble(4)
+            ));
         }
-
-        public static List<CustomerDto> searchCustomers (String searchText) throws SQLException, ClassNotFoundException {
-            searchText = "%" + searchText + "%";
-            String sql = "SELECT * FROM customer WHERE email LIKE ? || name LIKE ?";
-            PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, searchText);
-            preparedStatement.setString(2, searchText);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            List<CustomerDto> dtos = new ArrayList<>();
-            while (resultSet.next()) {
-                dtos.add(new CustomerDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getDouble(4)
-                ));
-            }
-            return dtos;
-        }
-
-        //========customer management==========//
+        return dtos;
     }
+
+    public static List<CustomerDto> searchCustomers(String searchText) throws SQLException, ClassNotFoundException {
+        searchText = "%" + searchText + "%";
+        String sql = "SELECT * FROM customer WHERE email LIKE ? || name LIKE ?";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        preparedStatement.setString(1, searchText);
+        preparedStatement.setString(2, searchText);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<CustomerDto> dtos = new ArrayList<>();
+        while (resultSet.next()) {
+            dtos.add(new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDouble(4)
+            ));
+        }
+        return dtos;
+    }
+
+    //========customer management==========//
+
+    //========product management==========//
+    public static int getLastProductId() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT code FROM product ORDER BY code DESC LIMIT 1";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return (resultSet.getInt(1)+1);
+        }
+        return 1;
+    }
+
+    public static boolean saveProduct(int code, String description) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO product VALUES(?,?)";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1,code);
+        preparedStatement.setString(2,description);
+        return preparedStatement.executeUpdate() > 0;
+    }
+    //========product management==========//
+}
+
+
+
 
