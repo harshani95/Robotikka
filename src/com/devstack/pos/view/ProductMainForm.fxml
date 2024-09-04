@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="545.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.ProductFormController">
+<AnchorPane fx:id="contextProduct" prefHeight="545.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.ProductMainFormController">
    <children>
       <Label layoutX="34.0" layoutY="32.0" prefHeight="35.0" prefWidth="277.0" text="Product Management" textFill="#30336b">
          <font>
@@ -31,7 +30,7 @@
       <Separator layoutX="29.0" layoutY="69.0" prefHeight="17.0" prefWidth="971.0" />
       <AnchorPane layoutX="19.0" layoutY="100.0" prefHeight="429.0" prefWidth="430.0" style="-fx-background-color: #bdc3c7;">
          <children>
-            <JFXButton layoutX="302.0" layoutY="14.0" onAction="#btnNewCustomerOnAction" style="-fx-background-color: #0fb9b1;" text="+New Product" textFill="#252424">
+            <JFXButton layoutX="302.0" layoutY="14.0" onAction="#btnNewProductOnAction" style="-fx-background-color: #0fb9b1;" text="+New Product" textFill="#252424">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -39,17 +38,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXTextField labelFloat="true" layoutX="24.0" layoutY="28.0" prefHeight="31.0" prefWidth="198.0" text="Product Code">
+            <JFXTextField fx:id="txtProductCode" labelFloat="true" layoutX="24.0" layoutY="28.0" prefHeight="31.0" prefWidth="198.0" text="Product Code">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
-            <TextArea layoutX="15.0" layoutY="73.0" prefHeight="83.0" prefWidth="407.0" text="Description">
+            <TextArea fx:id="txtProductDescription" layoutX="15.0" layoutY="73.0" prefHeight="83.0" prefWidth="407.0" text="Description">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </TextArea>
-            <JFXButton layoutX="262.0" layoutY="165.0" onAction="#btnNewCustomerOnAction" prefHeight="30.0" prefWidth="146.0" style="-fx-background-color: #4b6584;" text="Save Product" textFill="#eeeaea">
+            <JFXButton fx:id="btnSaveUpdate" layoutX="262.0" layoutY="165.0" onAction="#btnSaveUpdateOnAction" prefHeight="30.0" prefWidth="146.0" style="-fx-background-color: #4b6584;" text="Save Product" textFill="#eeeaea">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -57,8 +56,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <TextField layoutX="11.0" layoutY="215.0" prefHeight="25.0" prefWidth="407.0" text="Search here" />
-            <TableView layoutX="11.0" layoutY="249.0" prefHeight="166.0" prefWidth="407.0">
+            <TextField fx:id="txtSearch" layoutX="11.0" layoutY="215.0" prefHeight="25.0" prefWidth="407.0" text="Search here" />
+            <TableView fx:id="tblProduct" layoutX="11.0" layoutY="249.0" prefHeight="166.0" prefWidth="407.0">
               <columns>
                 <TableColumn prefWidth="86.0" text="Code" />
                 <TableColumn prefWidth="115.0" text="Description" />
@@ -80,7 +79,7 @@
             <TableColumn prefWidth="75.0" text="Delete" />
         </columns>
       </TableView>
-      <JFXButton layoutX="830.0" layoutY="101.0" onAction="#btnNewCustomerOnAction" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
+      <JFXButton layoutX="830.0" layoutY="101.0" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

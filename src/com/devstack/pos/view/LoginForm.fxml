@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="context" prefHeight="442.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.LoginFormController">
    <children>
       <Label layoutX="141.0" layoutY="41.0" text="Robotikka" textFill="#192a56">
@@ -16,12 +15,12 @@
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="64.0" layoutY="113.0" prefHeight="31.0" prefWidth="268.0" promptText="Email">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="64.0" layoutY="113.0" prefHeight="31.0" prefWidth="268.0" promptText="Email" text="harshani@gmail.com">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="64.0" layoutY="178.0" prefHeight="31.0" prefWidth="268.0" promptText="Password">
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="64.0" layoutY="178.0" prefHeight="31.0" prefWidth="268.0" promptText="Password" text="1234">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
