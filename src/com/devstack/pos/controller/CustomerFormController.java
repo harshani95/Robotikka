@@ -1,6 +1,6 @@
 package com.devstack.pos.controller;
 
-import com.devstack.pos.dao.DatabaseAccessCode;
+import com.devstack.pos.bo.custom.impl.CustomerBoImpl;
 import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.view.tm.CustomerTm;
 import com.jfoenix.controls.JFXButton;
@@ -78,7 +78,7 @@ public class CustomerFormController {
         ObservableList<CustomerTm> observableList = FXCollections.observableArrayList();
         int counter=1;
         for (CustomerDto dto:
-                searchText.length()>0?DatabaseAccessCode.searchCustomers(searchText):DatabaseAccessCode.findAllCustomers()){
+                searchText.length()>0?new CustomerBoImpl().searchCustomers(searchText):new CustomerBoImpl().findAllCustomers()){
             Button btn = new Button("Delete");
             CustomerTm tm = new CustomerTm(
                     counter,dto.getEmail(), dto.getName(), dto.getContact(), dto.getSalary(),
@@ -92,7 +92,7 @@ public class CustomerFormController {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure?", ButtonType.YES,ButtonType.NO);
                     Optional<ButtonType> selectedButtonType = alert.showAndWait();
                     if (selectedButtonType.get().equals(ButtonType.YES)){
-                        if (DatabaseAccessCode.deleteCustomer(dto.getEmail())){
+                        if (new CustomerBoImpl().deleteCustomer(dto.getEmail())){
                             new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted!").show();
                             loadAllCustomers(searchText);
                         }else{
@@ -120,13 +120,14 @@ public class CustomerFormController {
 
 
     public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
-        try {
+        try{
+
             if (btnSaveUpdate.getText().equals("Save Customer")){
                 if (
-                        DatabaseAccessCode.createCustomer(
-                                txtEmail.getText(),txtName.getText(),
-                                txtContact.getText(),Double.parseDouble(txtSalary.getText())
-                        )
+                        new CustomerBoImpl().saveCustomer(
+                                new CustomerDto(txtEmail.getText(),txtName.getText(),
+                                                txtContact.getText(),Double.parseDouble(txtSalary.getText())
+                                ))
                 ){
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved!").show();
                     clearFields();
@@ -136,10 +137,12 @@ public class CustomerFormController {
                 }
             }else{
                 if (
-                        DatabaseAccessCode.updateCustomer(
-                                txtEmail.getText(),txtName.getText(),
-                                txtContact.getText(),Double.parseDouble(txtSalary.getText())
-                        )
+                        new CustomerBoImpl().updateCustomer(
+                                new CustomerDto(
+                                        txtEmail.getText(),txtName.getText(),
+                                        txtContact.getText(),Double.parseDouble(txtSalary.getText())
+
+                                ))
                 ){
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!").show();
                     clearFields();

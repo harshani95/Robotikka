@@ -1,7 +1,7 @@
 package com.devstack.pos.controller;
 
-import com.devstack.pos.dao.DatabaseAccessCode;
-import com.devstack.pos.util.PasswordManager;
+import com.devstack.pos.bo.custom.impl.UserBoImpl;
+import com.devstack.pos.dto.UserDto;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -21,7 +21,7 @@ public class SignUpFormController {
 
     public void btnRegisterNowOnAction(ActionEvent actionEvent) {
         try{
-            if (DatabaseAccessCode.createUser(txtEmail.getText(),txtPassword.getText())){
+            if (new UserBoImpl().saveUser(new UserDto(txtEmail.getText(), txtPassword.getText()))) {
                 new Alert(Alert.AlertType.CONFIRMATION, "User Saved!").show();
                 clearFields();
             }else {
