@@ -1,7 +1,10 @@
 package com.devstack.pos.controller;
 
+import com.devstack.pos.bo.BoFactory;
+import com.devstack.pos.bo.custom.ProductBo;
 import com.devstack.pos.bo.custom.impl.ProductBoImpl;
 import com.devstack.pos.dto.ProductDto;
+import com.devstack.pos.enums.BoType;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -20,13 +23,15 @@ public class ProductMainFormController {
     public JFXTextField txtProductCode;
     private String searchText = "";
 
+    ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
+
     public void initialize() {
         loadProductId();
     }
 
     private void loadProductId() {
         try {
-            txtProductCode.setText(String.valueOf(new ProductBoImpl().getLastProductId()));
+            txtProductCode.setText(String.valueOf(bo.getLastProductId()));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +45,7 @@ public class ProductMainFormController {
         try {
             if (btnSaveUpdate.getText().equals("Save Product")) {
 
-                if (new ProductBoImpl().saveProduct(new ProductDto(Integer.parseInt(txtProductCode.getText()), txtProductDescription.getText()))) {
+                if (bo.saveProduct(new ProductDto(Integer.parseInt(txtProductCode.getText()), txtProductDescription.getText()))) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product Saved!").show();
                     clearFields();
                     loadAllProducts(searchText);
@@ -48,7 +53,7 @@ public class ProductMainFormController {
                     new Alert(Alert.AlertType.WARNING, "Try Again!").show();
                 }
             } else {
-                if (new ProductBoImpl().saveProduct(new ProductDto(Integer.parseInt(txtProductCode.getText()), txtProductDescription.getText()))) {
+                if (bo.saveProduct(new ProductDto(Integer.parseInt(txtProductCode.getText()), txtProductDescription.getText()))) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product Updated!").show();
                     clearFields();
                     loadAllProducts(searchText);
