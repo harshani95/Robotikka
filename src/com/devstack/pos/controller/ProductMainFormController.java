@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -67,7 +68,7 @@ public class ProductMainFormController {
         setUi("DashboardForm");
     }
 
-    public void btnNewProductOnAction(ActionEvent actionEvent) {
+    public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
         try {
             if (btnSaveUpdate.getText().equals("Save Product")) {
 
@@ -96,10 +97,15 @@ public class ProductMainFormController {
     }
     
 
-    public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
+    public void btnNewProductOnAction(ActionEvent actionEvent) throws IOException {
+
     }
 
     private void loadAllProducts(String searchText) {
+    }
+
+    public void newBatchOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("NewBatchForm");
     }
 
     private void clearFields() {
@@ -114,4 +120,6 @@ public class ProductMainFormController {
         stage.centerOnScreen();
 
     }
+
+
 }

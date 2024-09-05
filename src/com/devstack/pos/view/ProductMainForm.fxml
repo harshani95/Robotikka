@@ -79,7 +79,7 @@
             <TableColumn prefWidth="75.0" text="Delete" />
         </columns>
       </TableView>
-      <JFXButton layoutX="830.0" layoutY="101.0" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
+      <JFXButton layoutX="830.0" layoutY="101.0" onAction="#newBatchOnAction" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
