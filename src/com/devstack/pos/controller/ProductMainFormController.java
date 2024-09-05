@@ -32,7 +32,7 @@ public class ProductMainFormController {
     public TableColumn colCode;
     public TextArea txtSelectedProdDescription;
     public TextField txtSelectedProdCode;
-    public AnchorPane contextProduct;
+    public AnchorPane context;
     private String searchText = "";
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
@@ -115,7 +115,7 @@ public class ProductMainFormController {
     }
 
     public void setUi(String url) throws IOException {
-        Stage stage = (Stage)contextProduct.getScene().getWindow();
+        Stage stage = (Stage)context.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
         stage.centerOnScreen();
 
