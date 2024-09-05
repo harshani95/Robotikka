@@ -5,28 +5,53 @@ import com.devstack.pos.bo.custom.ProductBo;
 import com.devstack.pos.bo.custom.impl.ProductBoImpl;
 import com.devstack.pos.dto.ProductDto;
 import com.devstack.pos.enums.BoType;
+import com.devstack.pos.view.tm.ProductTm;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ProductMainFormController {
     public TextArea txtProductDescription;
     public JFXButton btnSaveUpdate;
     public TextField txtSearch;
-    public TableView tblProduct;
+    public TableView<ProductTm> tblProduct;
     public JFXTextField txtProductCode;
+    public TableColumn colDelete;
+    public TableColumn colShowMore;
+    public TableColumn colDescription;
+    public TableColumn colCode;
+    public TextArea txtSelectedProdDescription;
+    public TextField txtSelectedProdCode;
+    public AnchorPane contextProduct;
     private String searchText = "";
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
 
     public void initialize() {
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colShowMore.setCellValueFactory(new PropertyValueFactory<>("showMore"));
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
         loadProductId();
+        loadAllProducts(searchText);
+
+        tblProduct.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(ProductTm newValue) {
+        txtSelectedProdCode.setText(String.valueOf(newValue.getCode()));
+        txtSelectedProdDescription.setText(newValue.getDescription());
     }
 
     private void loadProductId() {
@@ -38,7 +63,8 @@ public class ProductMainFormController {
     }
 
 
-    public void btnBackToHomeOnAction(ActionEvent actionEvent) {
+    public void btnBackToHomeOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("DashboardForm");
     }
 
     public void btnNewProductOnAction(ActionEvent actionEvent) {
@@ -80,5 +106,12 @@ public class ProductMainFormController {
         txtProductCode.clear();
         txtProductDescription.clear();
         loadProductId();
+    }
+
+    public void setUi(String url) throws IOException {
+        Stage stage = (Stage)contextProduct.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
+        stage.centerOnScreen();
+
     }
 }
