@@ -3,15 +3,13 @@ package com.devstack.pos.dao;
 import com.devstack.pos.dao.custom.CustomerDao;
 import com.devstack.pos.dao.custom.ProductDao;
 import com.devstack.pos.dao.custom.UserDao;
-import com.devstack.pos.dao.custom.impl.CustomerDaoImpl;
-import com.devstack.pos.dao.custom.impl.ProductDaoImpl;
-import com.devstack.pos.dao.custom.impl.UserDaoImpl;
 import com.devstack.pos.db.DbConnection;
 import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.dto.UserDto;
 import com.devstack.pos.entity.Customer;
 import com.devstack.pos.entity.Product;
 import com.devstack.pos.entity.User;
+import com.devstack.pos.enums.DaoType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,9 +17,9 @@ import java.util.List;
 
 public class DatabaseAccessCode {
 
-    CustomerDao customerDao= new CustomerDaoImpl();
-    ProductDao productDao = new ProductDaoImpl();
-    UserDao userDao= new UserDaoImpl();
+    CustomerDao customerDao = (CustomerDao) DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    ProductDao productDao = (ProductDao) DaoFactory.getInstance().getDao(DaoType.PRODUCT);
+    UserDao userDao= (UserDao) DaoFactory.getInstance().getDao(DaoType.USER);
 
     //========user management==========//
 
@@ -83,7 +81,7 @@ public class DatabaseAccessCode {
     public List<CustomerDto> findAllCustomers() throws SQLException, ClassNotFoundException {
         List<CustomerDto> dtos = new ArrayList<>();
 
-        for (Customer c:customerDao.findAllCustomers()
+        for (Customer c:customerDao.findAll()
         ) {
             dtos.add(new CustomerDto(
                     c.getEmail(),
