@@ -69,7 +69,7 @@ public class NewBatchFormController {
 
     public void saveBatchOnAction(ActionEvent actionEvent) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        javax.imageio.ImageIO.write(bufferedImage, "barcode", baos);
+        javax.imageio.ImageIO.write(bufferedImage, "png", baos);
         byte[] arr = baos.toByteArray();
 
         ProductDetailDto dto = new ProductDetailDto(
