@@ -79,7 +79,7 @@
             <TableColumn prefWidth="75.0" text="Delete" />
         </columns>
       </TableView>
-      <JFXButton layoutX="830.0" layoutY="101.0" onAction="#newBatchOnAction" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
+      <JFXButton fx:id="btnNewBatch" buttonType="RAISED" disable="true" layoutX="830.0" layoutY="101.0" onAction="#newBatchOnAction" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -87,12 +87,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextArea fx:id="txtSelectedProdDescription" editable="false" layoutX="466.0" layoutY="145.0" prefHeight="83.0" prefWidth="531.0" text="Description">
+      <TextArea fx:id="txtSelectedProductDescription" editable="false" layoutX="466.0" layoutY="145.0" prefHeight="83.0" prefWidth="531.0" text="Description">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextArea>
-      <TextField fx:id="txtSelectedProdCode" editable="false" layoutX="466.0" layoutY="100.0" prefHeight="25.0" prefWidth="224.0" text="SelectedProduct Code">
+      <TextField fx:id="txtSelectedProductCode" editable="false" layoutX="466.0" layoutY="100.0" prefHeight="25.0" prefWidth="224.0" text="SelectedProduct Code">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

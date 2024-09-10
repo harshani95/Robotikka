@@ -2,7 +2,6 @@ package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.ProductBo;
-import com.devstack.pos.bo.custom.impl.ProductBoImpl;
 import com.devstack.pos.dto.ProductDto;
 import com.devstack.pos.enums.BoType;
 import com.devstack.pos.view.tm.ProductTm;
@@ -30,9 +29,10 @@ public class ProductMainFormController {
     public TableColumn colShowMore;
     public TableColumn colDescription;
     public TableColumn colCode;
-    public TextArea txtSelectedProdDescription;
-    public TextField txtSelectedProdCode;
     public AnchorPane context;
+    public JFXButton btnNewBatch;
+    public TextArea txtSelectedProductDescription;
+    public TextField txtSelectedProductCode;
     private String searchText = "";
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
@@ -51,8 +51,9 @@ public class ProductMainFormController {
     }
 
     private void setData(ProductTm newValue) {
-        txtSelectedProdCode.setText(String.valueOf(newValue.getCode()));
-        txtSelectedProdDescription.setText(newValue.getDescription());
+        txtSelectedProductCode.setText(String.valueOf(newValue.getCode()));
+        txtSelectedProductDescription.setText(newValue.getDescription());
+        btnNewBatch.setDisable(false);
     }
 
     private void loadProductId() {
@@ -105,7 +106,23 @@ public class ProductMainFormController {
     }
 
     public void newBatchOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("NewBatchForm");
+        if (!txtSelectedProductCode.getText().isEmpty()){
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(getClass()
+                            .getResource("../view/NewBatchForm.fxml"));
+            Parent parent = fxmlLoader.load();
+            NewBatchFormController controller = fxmlLoader.getController();
+            controller.setDetails(Integer.parseInt(txtSelectedProductCode.getText())
+                    ,txtSelectedProductDescription.getText(),stage);
+
+            stage.setScene(new Scene(parent));
+            stage.show();
+            stage.centerOnScreen();
+
+        }else{
+            new Alert(Alert.AlertType.WARNING,"Please select a valid one!");
+        }
     }
 
     private void clearFields() {
