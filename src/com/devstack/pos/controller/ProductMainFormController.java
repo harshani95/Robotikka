@@ -7,6 +7,8 @@ import com.devstack.pos.enums.BoType;
 import com.devstack.pos.view.tm.ProductTm;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +39,7 @@ public class ProductMainFormController {
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
 
-    public void initialize() {
+    public void initialize() throws SQLException, ClassNotFoundException {
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colShowMore.setCellValueFactory(new PropertyValueFactory<>("showMore"));
@@ -102,7 +104,16 @@ public class ProductMainFormController {
 
     }
 
-    private void loadAllProducts(String searchText) {
+    private void loadAllProducts(String searchText) throws SQLException, ClassNotFoundException {
+        ObservableList<ProductTm> tms = FXCollections.observableArrayList();
+        for (ProductDto dto : bo.findAllProducts()
+        ) {
+            Button showMore = new Button("Show more");
+            Button delete = new Button("Delete");
+            ProductTm tm = new ProductTm(dto.getCode(), dto.getDescription(), showMore, delete);
+            tms.add(tm);
+        }
+        tblProduct.setItems(tms);
     }
 
     public void newBatchOnAction(ActionEvent actionEvent) throws IOException {
