@@ -45,7 +45,7 @@
             </JFXTextField>
             <TextArea fx:id="txtProductDescription" layoutX="15.0" layoutY="73.0" prefHeight="83.0" prefWidth="407.0" text="Description">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </TextArea>
             <JFXButton fx:id="btnSaveUpdate" layoutX="262.0" layoutY="165.0" onAction="#btnSaveUpdateOnAction" prefHeight="30.0" prefWidth="146.0" style="-fx-background-color: #4b6584;" text="Save Product" textFill="#eeeaea">
@@ -68,15 +68,15 @@
          </children>
       </AnchorPane>
       <Separator layoutX="456.0" layoutY="100.0" orientation="VERTICAL" prefHeight="429.0" prefWidth="0.0" />
-      <TableView layoutX="466.0" layoutY="253.0" prefHeight="269.0" prefWidth="537.0">
+      <TableView fx:id="tblProductDetail" layoutX="466.0" layoutY="253.0" prefHeight="269.0" prefWidth="537.0">
         <columns>
-          <TableColumn prefWidth="60.0" text="Code" />
-          <TableColumn prefWidth="59.0" text="Qty" />
-            <TableColumn prefWidth="92.0" text="Selling Price" />
-            <TableColumn prefWidth="89.0" text="Buying Price" />
-            <TableColumn prefWidth="75.0" text="Discount-A" />
-            <TableColumn prefWidth="85.0" text="Show Price" />
-            <TableColumn prefWidth="75.0" text="Delete" />
+          <TableColumn fx:id="colPDCode" prefWidth="60.0" text="Code" />
+          <TableColumn fx:id="colPDQty" prefWidth="59.0" text="Qty" />
+            <TableColumn fx:id="colPDSellingPrice" prefWidth="92.0" text="Selling Price" />
+            <TableColumn fx:id="colPDBuyingPrice" prefWidth="89.0" text="Buying Price" />
+            <TableColumn fx:id="colPDDiscount" prefWidth="75.0" text="Discount-A" />
+            <TableColumn fx:id="colPDShowPrice" prefWidth="85.0" text="Show Price" />
+            <TableColumn fx:id="colPDDelete" prefWidth="75.0" text="Delete" />
         </columns>
       </TableView>
       <JFXButton fx:id="btnNewBatch" buttonType="RAISED" disable="true" layoutX="830.0" layoutY="101.0" onAction="#newBatchOnAction" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #0fb9b1;" text="+New Batch" textFill="#252424">

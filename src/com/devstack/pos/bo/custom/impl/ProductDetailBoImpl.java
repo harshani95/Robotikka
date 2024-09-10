@@ -8,6 +8,8 @@ import com.devstack.pos.entity.ProductDetail;
 import com.devstack.pos.enums.DaoType;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDetailBoImpl implements ProductDetailBo {
 
@@ -22,5 +24,21 @@ public class ProductDetailBoImpl implements ProductDetailBo {
                         dto.isDiscountAvailability()
                 )
         );
+    }
+
+    @Override
+    public List<ProductDetailDto> findAllProductDetails(int productCode) throws SQLException, ClassNotFoundException {
+            List<ProductDetailDto> dtos = new ArrayList<>();
+            for (ProductDetail d:dao.findAllProductDetails(productCode)
+            ) {
+                dtos.add(
+                        new ProductDetailDto(
+                                d.getCode(),d.getBarcode(),d.getQtyOnHand(),d.getSellingPrice(),
+                                d.getShowPrice(),d.getBuyingPrice(),d.getProductCode(),
+                                d.isDiscountAvailability()
+                        )
+                );
+            }
+            return dtos;
     }
 }
