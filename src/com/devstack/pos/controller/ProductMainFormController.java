@@ -71,6 +71,35 @@ public class ProductMainFormController {
         tblProduct.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             setData(newValue);
         });
+
+        tblProductDetail.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    try{
+                        loadExternalUi(true, newValue);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                });
+    }
+
+    private void loadExternalUi(boolean state, ProductDetailTm tm) throws IOException {
+        if (!txtSelectedProductCode.getText().isEmpty()){
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(getClass()
+                            .getResource("../view/NewBatchForm.fxml"));
+            Parent parent = fxmlLoader.load();
+            NewBatchFormController controller = fxmlLoader.getController();
+            controller.setDetails(Integer.parseInt(txtSelectedProductCode.getText())
+                    ,txtSelectedProductDescription.getText(),stage,state,tm);
+            stage.setScene(new Scene(parent));
+            stage.show();
+            stage.centerOnScreen();
+        }else{
+            new Alert(Alert.AlertType.WARNING,"Please select a valid one!");
+        }
     }
 
     private void setData(ProductTm newValue)  {
@@ -158,23 +187,7 @@ public class ProductMainFormController {
     }
 
     public void newBatchOnAction(ActionEvent actionEvent) throws IOException {
-        if (!txtSelectedProductCode.getText().isEmpty()){
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass()
-                            .getResource("../view/NewBatchForm.fxml"));
-            Parent parent = fxmlLoader.load();
-            NewBatchFormController controller = fxmlLoader.getController();
-            controller.setDetails(Integer.parseInt(txtSelectedProductCode.getText())
-                    ,txtSelectedProductDescription.getText(),stage);
-
-            stage.setScene(new Scene(parent));
-            stage.show();
-            stage.centerOnScreen();
-
-        }else{
-            new Alert(Alert.AlertType.WARNING,"Please select a valid one!");
-        }
+        loadExternalUi(false, null);
     }
 
     private void clearFields() {

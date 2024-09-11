@@ -5,6 +5,7 @@ import com.devstack.pos.bo.custom.ProductDetailBo;
 import com.devstack.pos.dto.ProductDetailDto;
 import com.devstack.pos.enums.BoType;
 import com.devstack.pos.util.QrDataGenerator;
+import com.devstack.pos.view.tm.ProductDetailTm;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import org.apache.commons.codec.binary.Base64;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,7 +42,7 @@ public class NewBatchFormController {
     private ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
 
     public void initialize() throws WriterException {
-        setQRCode();
+
     }
 
     private void setQRCode() throws WriterException {
@@ -60,11 +62,45 @@ public class NewBatchFormController {
         barcodeImage.setImage(image);
     }
 
-    public void setDetails(int code, String description, Stage stage) {
+    public void setDetails(int code, String description, Stage stage, boolean state, ProductDetailTm tm) {
+        this.stage=stage;
+
+        if (state){
+            try {
+                ProductDetailDto productDetail = productDetailBo.findProductDetail(tm.getCode());
+
+                if (productDetail!=null){
+                    txtQty.setText(String.valueOf(productDetail.getQtyOnHand()));
+                    txtBuyingPrice.setText(String.valueOf(productDetail.getBuyingPrice()));
+                    txtSellingPrice.setText(String.valueOf(productDetail.getSellingPrice()));
+                    txtShowPrice.setText(String.valueOf(productDetail.getShowPrice()));
+                    rBtnYes.setSelected(productDetail.isDiscountAvailability());
+
+                    byte[] data = Base64.decodeBase64(productDetail.getBarcode());
+                    barcodeImage.setImage(
+                            new Image(new ByteArrayInputStream(data))
+                    );
+
+                }else{
+                    stage.close();
+                }
+
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            try {
+                setQRCode();
+            } catch (WriterException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         txtSelectedProductCode.setText(String.valueOf(code));
         txtSelectedProductDescription.setText(description);
-        this.stage=stage;
-    }
+        }
+
+
 
 
     public void saveBatchOnAction(ActionEvent actionEvent) throws IOException {
