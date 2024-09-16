@@ -25,14 +25,15 @@ public class DashboardFormController {
     public void btnIncomeReportOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("PlaceOrderForm");
     }
 
     private void setUi(String url) throws IOException {
         Stage stage = (Stage) context.getScene().getWindow();
-        stage.centerOnScreen();
         stage.setScene(
                 new Scene(FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml")))
         );
+        stage.centerOnScreen();
     }
 }

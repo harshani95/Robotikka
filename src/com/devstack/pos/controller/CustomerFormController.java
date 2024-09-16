@@ -174,10 +174,10 @@ public class CustomerFormController {
 
     private void setUi(String url) throws IOException {
         Stage stage = (Stage) contextCustomer.getScene().getWindow();
-        stage.centerOnScreen();
         stage.setScene(
                 new Scene(FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml")))
         );
+        stage.centerOnScreen();
     }
 
 }

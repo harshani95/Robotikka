@@ -52,7 +52,6 @@ public class LoginFormController {
             Stage stage = (Stage)context.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
             stage.centerOnScreen();
-
         }
 }
 
