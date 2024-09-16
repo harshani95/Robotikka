@@ -105,54 +105,54 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField editable="false" layoutX="17.0" layoutY="298.0" prefHeight="31.0" prefWidth="227.0" promptText="Description">
+      <TextField fx:id="txtDescription" editable="false" layoutX="17.0" layoutY="298.0" prefHeight="31.0" prefWidth="227.0" promptText="Description">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="256.0" layoutY="298.0" prefHeight="31.0" prefWidth="163.0" promptText="Selling Price">
+      <TextField fx:id="txtSellingPrice" editable="false" layoutX="256.0" layoutY="298.0" prefHeight="31.0" prefWidth="163.0" promptText="Selling Price">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="583.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Discount">
+      <TextField fx:id="txtDiscount" editable="false" layoutX="583.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Discount">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="738.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Show Price">
+      <TextField fx:id="txtShowPrice" editable="false" layoutX="738.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Show Price">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Hyperlink layoutX="19.0" layoutY="342.0" prefHeight="27.0" prefWidth="154.0" text="Discount Available" textFill="#ee1414" underline="true">
+      <Hyperlink fx:id="lblDiscountAvailable" layoutX="19.0" layoutY="342.0" prefHeight="27.0" prefWidth="154.0" text="Discount Available" textFill="#ee1414" underline="true" visible="false">
          <font>
             <Font size="13.0" />
          </font>
       </Hyperlink>
       <Separator layoutX="17.0" layoutY="278.0" prefHeight="17.0" prefWidth="1131.0" />
-      <TextField editable="false" layoutX="893.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Buying Price">
+      <TextField fx:id="txtBuyingPrice" editable="false" layoutX="893.0" layoutY="298.0" prefHeight="31.0" prefWidth="146.0" promptText="Buying Price">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField layoutX="198.0" layoutY="250.0" prefHeight="27.0" prefWidth="199.0" promptText="Selling Price" text="barcode">
+      <TextField fx:id="txtBarcode" layoutX="198.0" layoutY="250.0" onAction="#loadProduct" prefHeight="27.0" prefWidth="199.0" promptText="Selling Price" text="barcode">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="432.0" layoutY="298.0" prefHeight="31.0" prefWidth="138.0" promptText="Qty On Hand">
+      <TextField fx:id="txtQtyOnHand" editable="false" layoutX="432.0" layoutY="298.0" prefHeight="31.0" prefWidth="138.0" promptText="Qty On Hand">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField layoutX="1050.0" layoutY="298.0" prefHeight="31.0" prefWidth="83.0" promptText="QTY" style="-fx-border-color: #3498db;">
+      <TextField fx:id="txtQty" layoutX="1050.0" layoutY="298.0" onAction="#addToCart" prefHeight="31.0" prefWidth="83.0" promptText="QTY" style="-fx-border-color: #3498db;">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
       <Separator layoutX="251.0" layoutY="157.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="7.0" />
-      <TableView layoutX="19.0" layoutY="380.0" prefHeight="255.0" prefWidth="1113.0">
+      <TableView fx:id="tblCart" layoutX="19.0" layoutY="380.0" prefHeight="255.0" prefWidth="1113.0">
         <columns>
           <TableColumn fx:id="colCode" prefWidth="97.0" text="Code" />
           <TableColumn fx:id="colDescription" prefWidth="202.0" text="Description" />
@@ -177,7 +177,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="645.0" prefHeight="35.0" prefWidth="105.0" text="0.00/=" textFill="#bf3321">
+      <Label fx:id="txtTotal" layoutX="121.0" layoutY="645.0" prefHeight="35.0" prefWidth="105.0" text="0.00/=" textFill="#bf3321">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

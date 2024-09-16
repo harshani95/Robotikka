@@ -2,7 +2,9 @@ package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.CustomerBo;
+import com.devstack.pos.bo.custom.ProductDetailBo;
 import com.devstack.pos.dto.CustomerDto;
+import com.devstack.pos.dto.ProductDetailJoinDto;
 import com.devstack.pos.enums.BoType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -31,8 +33,19 @@ public class PlaceOrderFormController {
     public TextField txtName;
     public TextField txtContact;
     public TextField txtSalary;
+    public TextField txtDescription;
+    public TextField txtSellingPrice;
+    public TextField txtDiscount;
+    public TextField txtShowPrice;
+    public Hyperlink lblDiscountAvailable;
+    public TextField txtBuyingPrice;
+    public TextField txtBarcode;
+    public TextField txtQtyOnHand;
+    public TextField txtQty;
+    public TableView tblCart;
 
     CustomerBo bo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    private ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
 
     public void btnBackToHomeOnAction(ActionEvent actionEvent) throws IOException {
         setUi("DashboardForm", false);
@@ -50,7 +63,28 @@ public class PlaceOrderFormController {
     public void newLoyaltyOnAction(ActionEvent actionEvent) {
     }
 
+    public void loadProduct(ActionEvent actionEvent) {
+        try {
+            ProductDetailJoinDto p  = productDetailBo.findProductJoinDetail(
+                    txtBarcode.getText()
+            );
+            if (p!=null){
+                txtDescription.setText(p.getDescription());
+                txtDiscount.setText(String.valueOf(0));
+                txtSellingPrice.setText(String.valueOf(p.getDto().getSellingPrice()));
+                txtShowPrice.setText(String.valueOf(p.getDto().getShowPrice()));
+                txtQtyOnHand.setText(String.valueOf(p.getDto().getQtyOnHand()));
+                txtBuyingPrice.setText(String.valueOf(p.getDto().getBuyingPrice()));
+                txtQty.requestFocus();
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Can't Find the Product!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.WARNING, "Can't Find the Product!").show();
+            throw new RuntimeException(e);
+        }
 
+    }
 
     public void searchCustomer(ActionEvent actionEvent) {
         try {
@@ -93,4 +127,5 @@ public class PlaceOrderFormController {
         }
 
     }
+
 }
