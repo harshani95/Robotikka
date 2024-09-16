@@ -45,7 +45,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXButton layoutX="1007.0" layoutY="19.0" onAction="#btnNewProductOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
+      <JFXButton layoutX="1007.0" layoutY="19.0" onAction="#btnBackToHomeOnAction" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #4b7bec;" text="Back to home">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -54,22 +54,22 @@
          </cursor>
       </JFXButton>
       <Separator layoutX="15.0" layoutY="133.0" prefHeight="17.0" prefWidth="1131.0" />
-      <TextField layoutX="15.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="Email">
+      <TextField fx:id="txtEmail" layoutX="15.0" layoutY="157.0" onAction="#searchCustomer" prefHeight="31.0" prefWidth="227.0" promptText="Email">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="266.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="name">
+      <TextField fx:id="txtName" editable="false" layoutX="266.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="name">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="506.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="Contact No">
+      <TextField fx:id="txtContact" editable="false" layoutX="506.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="Contact No">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="749.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="Salary">
+      <TextField fx:id="txtSalary" editable="false" layoutX="749.0" layoutY="157.0" prefHeight="31.0" prefWidth="227.0" promptText="Salary">
          <font>
             <Font size="15.0" />
          </font>
@@ -82,12 +82,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Hyperlink layoutX="20.0" layoutY="201.0" text="Show Loyalty Card Information" underline="true">
+      <Hyperlink fx:id="urlNewLoyalty" layoutX="20.0" layoutY="201.0" onAction="#newLoyaltyOnAction" text="Show Loyalty Card Information" underline="true" visible="false">
          <font>
             <Font size="13.0" />
          </font>
       </Hyperlink>
-      <Label layoutX="191.0" layoutY="114.0" prefHeight="20.0" prefWidth="112.0" text="(GOLD Member)">
+      <Label fx:id="lblLoyaltyType" layoutX="191.0" layoutY="114.0" prefHeight="20.0" prefWidth="112.0" text="(GOLD Member)" visible="false">
          <font>
             <Font size="14.0" />
          </font>
@@ -154,14 +154,14 @@
       <Separator layoutX="251.0" layoutY="157.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="7.0" />
       <TableView layoutX="19.0" layoutY="380.0" prefHeight="255.0" prefWidth="1113.0">
         <columns>
-          <TableColumn prefWidth="97.0" text="Code" />
-          <TableColumn prefWidth="202.0" text="Description" />
-            <TableColumn prefWidth="137.0" text="Selling Price" />
-            <TableColumn prefWidth="125.0" text="Discount" />
-            <TableColumn prefWidth="138.0" text="Show Price" />
-            <TableColumn prefWidth="117.0" text="QTY" />
-            <TableColumn prefWidth="139.0" text="Total Cost" />
-            <TableColumn minWidth="0.0" prefWidth="158.0" text="Operation" />
+          <TableColumn fx:id="colCode" prefWidth="97.0" text="Code" />
+          <TableColumn fx:id="colDescription" prefWidth="202.0" text="Description" />
+            <TableColumn fx:id="colSellingPrice" prefWidth="137.0" text="Selling Price" />
+            <TableColumn fx:id="colDiscount" prefWidth="125.0" text="Discount" />
+            <TableColumn fx:id="colShowPrice" prefWidth="138.0" text="Show Price" />
+            <TableColumn fx:id="colQty" prefWidth="117.0" text="QTY" />
+            <TableColumn fx:id="colTotalCost" prefWidth="139.0" text="Total Cost" />
+            <TableColumn fx:id="colOperation" minWidth="0.0" prefWidth="158.0" text="Operation" />
         </columns>
       </TableView>
       <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="647.0" onAction="#btnBackToHomeOnAction" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #2980b9;" text="Complete Order" textFill="#f5f2f2">
