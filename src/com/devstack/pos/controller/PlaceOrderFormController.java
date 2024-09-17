@@ -6,10 +6,14 @@ import com.devstack.pos.bo.custom.ProductDetailBo;
 import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.dto.ProductDetailJoinDto;
 import com.devstack.pos.enums.BoType;
+import com.devstack.pos.view.tm.CartTm;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -42,10 +46,22 @@ public class PlaceOrderFormController {
     public TextField txtBarcode;
     public TextField txtQtyOnHand;
     public TextField txtQty;
-    public TableView tblCart;
+    public TableView<CartTm> tblCart;
+    public Label txtTotal;
 
     CustomerBo bo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     private ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
+
+    public void initialize(){
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
+        colDiscount.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        colShowPrice.setCellValueFactory(new PropertyValueFactory<>("showPrice"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colTotalCost.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
+        colOperation.setCellValueFactory(new PropertyValueFactory<>("btn"));
+    }
 
     public void btnBackToHomeOnAction(ActionEvent actionEvent) throws IOException {
         setUi("DashboardForm", false);
@@ -112,6 +128,28 @@ public class PlaceOrderFormController {
         urlNewLoyalty.setVisible(true);
     }
 
+    ObservableList<CartTm> tms= FXCollections.observableArrayList();
+    public void addToCart(ActionEvent actionEvent) {
+        int qty=Integer.parseInt(txtQty.getText());
+        double sellingPrice= Double.parseDouble(txtSellingPrice.getText());
+        double totalCost = qty*sellingPrice;
+        Button btn = new Button("Remove");
+
+        CartTm tm = new CartTm(txtBarcode.getText(),
+                txtDescription.getText(),
+                Double.parseDouble(txtDiscount.getText()),
+                sellingPrice,
+                Double.parseDouble(txtShowPrice.getText()),
+                qty,
+                totalCost,
+                btn);
+        tms.add(tm);
+
+
+        tblCart.setItems(tms);
+    }
+
+
     private void setUi(String url, boolean state) throws IOException {
         Stage stage = null;
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml")));
@@ -127,5 +165,6 @@ public class PlaceOrderFormController {
         }
 
     }
+
 
 }
