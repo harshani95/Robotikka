@@ -2,6 +2,7 @@ package com.devstack.pos.entity;
 
 public class ItemDetail implements SuperEntity{
     private String detailCode;
+    private int order;
     private int qty;
     private double discount;
     private double amount;
@@ -9,8 +10,9 @@ public class ItemDetail implements SuperEntity{
     public ItemDetail() {
     }
 
-    public ItemDetail(String detailCode, int qty, double discount, double amount) {
+    public ItemDetail(String detailCode, int order, int qty, double discount, double amount) {
         this.detailCode = detailCode;
+        this.order = order;
         this.qty = qty;
         this.discount = discount;
         this.amount = amount;
@@ -22,6 +24,14 @@ public class ItemDetail implements SuperEntity{
 
     public void setDetailCode(String detailCode) {
         this.detailCode = detailCode;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public int getQty() {
@@ -52,6 +62,7 @@ public class ItemDetail implements SuperEntity{
     public String toString() {
         return "ItemDetailDto{" +
                 "detailCode='" + detailCode + '\'' +
+                ", order=" + order +
                 ", qty=" + qty +
                 ", discount=" + discount +
                 ", amount=" + amount +

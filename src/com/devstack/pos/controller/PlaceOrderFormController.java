@@ -2,11 +2,19 @@ package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.CustomerBo;
+import com.devstack.pos.bo.custom.LoyaltyCardBo;
+import com.devstack.pos.bo.custom.OrderDetailBo;
 import com.devstack.pos.bo.custom.ProductDetailBo;
-import com.devstack.pos.dto.CustomerDto;
-import com.devstack.pos.dto.ProductDetailJoinDto;
+import com.devstack.pos.dto.*;
 import com.devstack.pos.enums.BoType;
+import com.devstack.pos.enums.CardType;
+import com.devstack.pos.util.QrDataGenerator;
+import com.devstack.pos.util.UserSessionData;
 import com.devstack.pos.view.tm.CartTm;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +24,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.apache.commons.codec.binary.Base64;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class PlaceOrderFormController {
     public AnchorPane context;
@@ -47,10 +61,12 @@ public class PlaceOrderFormController {
     public TextField txtQtyOnHand;
     public TextField txtQty;
     public TableView<CartTm> tblCart;
-    public Label txtTotal;
+    public Label lblTotal;
 
     CustomerBo bo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     private ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
+    private OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
+    private LoyaltyCardBo loyaltyCardBo = BoFactory.getInstance().getBo(BoType.LOYALTY_CARD);
 
     public void initialize(){
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -77,6 +93,58 @@ public class PlaceOrderFormController {
 
 
     public void newLoyaltyOnAction(ActionEvent actionEvent) {
+        try {
+            double salary = Double.parseDouble(txtSalary.getText());
+
+            CardType type = null;
+            if (salary >= 100000) {
+                type = CardType.PLATINUM;
+            } else if (salary >= 50000) {
+                type = CardType.GOLD;
+            } else {
+                type = CardType.SILVER;
+            }
+
+            String uniqueData = QrDataGenerator.generate(25);
+            //----------------------Gen QR
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BufferedImage bufferedImage =
+                    MatrixToImageWriter.toBufferedImage(
+                            qrCodeWriter.encode(
+                                    uniqueData,
+                                    BarcodeFormat.QR_CODE,
+                                    160, 160
+                            )
+                    );
+            //----------------------Gen QR
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            javax.imageio.ImageIO.write(bufferedImage, "png", baos);
+            byte[] arr = baos.toByteArray();
+
+            if (urlNewLoyalty.getText().equals("+ New Loyalty")) {
+                boolean isLoyaltyCardAssigned =
+                        loyaltyCardBo.saveLoyaltyData(
+                                new LoyaltyCardDto(
+                                        new Random().nextInt(10001),
+                                        type, Base64.encodeBase64String(arr), txtEmail.getText())
+                        );
+                if (isLoyaltyCardAssigned) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Saved").show();
+                    urlNewLoyalty.setText("Show Loyalty Card Info");
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Try Again Shortly!").show();
+                }
+            } else {
+                // view data
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.WARNING, "Try Again Shortly!").show();
+            throw new RuntimeException(e);
+        } catch (WriterException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void loadProduct(ActionEvent actionEvent) {
@@ -163,7 +231,7 @@ public class PlaceOrderFormController {
         ) {
             total += tm.getTotalCost();
         }
-        txtTotal.setText(total + " /=");
+        lblTotal.setText(total + " /=");
     }
 
     private void clear() {
@@ -195,4 +263,38 @@ public class PlaceOrderFormController {
     }
 
 
+    public void btnCompleteOrder(ActionEvent actionEvent) {
+        ArrayList<ItemDetailDto> dtoList = new ArrayList<>();
+        double discount = 0;
+        for (CartTm tm : tms
+        ) {
+            dtoList.add(new ItemDetailDto(tm.getCode(), tm.getQty(), tm.getDiscount(),
+                    tm.getTotalCost()));
+            discount += tm.getDiscount();
+        }
+
+        OrderDetailDto dto = new OrderDetailDto(
+                new Random().nextInt(100001),
+                new Date(),
+                Double.parseDouble(lblTotal.getText().split(" /=")[0]),
+                txtEmail.getText(),
+                discount,
+                UserSessionData.email,
+                dtoList
+        );
+        try {
+            if(orderDetailBo.makeOrder(dto)){
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!").show();
+                clearFields();
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+        }
+    }
+
+    private void clearFields() {
+    }
 }

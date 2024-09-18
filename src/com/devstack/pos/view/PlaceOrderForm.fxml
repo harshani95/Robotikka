@@ -164,7 +164,7 @@
             <TableColumn fx:id="colOperation" minWidth="0.0" prefWidth="158.0" text="Operation" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="647.0" onAction="#btnBackToHomeOnAction" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #2980b9;" text="Complete Order" textFill="#f5f2f2">
+      <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="647.0" onAction="#btnCompleteOrder" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #2980b9;" text="Complete Order" textFill="#f5f2f2">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -177,7 +177,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="txtTotal" layoutX="121.0" layoutY="645.0" prefHeight="35.0" prefWidth="105.0" text="0.00/=" textFill="#bf3321">
+      <Label fx:id="lblTotal" layoutX="121.0" layoutY="645.0" prefHeight="35.0" prefWidth="105.0" text="0.00/=" textFill="#bf3321">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

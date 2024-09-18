@@ -12,20 +12,18 @@ public class OrderDetail implements SuperEntity{
     private String customerEmail;
     private double discount;
     private String operatorEmail;
-    private List<ItemDetailDto> itemDetail;
 
     public OrderDetail() {
     }
 
     public OrderDetail(int code, Date issuedDate, double totalCost, String customerEmail, double discount,
-                       String operatorEmail, List<ItemDetailDto> itemDetail) {
+                       String operatorEmail) {
         this.code = code;
         this.issuedDate = issuedDate;
         this.totalCost = totalCost;
         this.customerEmail = customerEmail;
         this.discount = discount;
         this.operatorEmail = operatorEmail;
-        this.itemDetail = itemDetail;
     }
 
     public int getCode() {
@@ -76,14 +74,6 @@ public class OrderDetail implements SuperEntity{
         this.operatorEmail = operatorEmail;
     }
 
-    public List<ItemDetailDto> getItemDetailDto() {
-        return itemDetail;
-    }
-
-    public void setItemDetailDto(List<ItemDetailDto> itemDetail) {
-        this.itemDetail = itemDetail;
-    }
-
     @Override
     public String toString() {
         return "OrderDetail{" +
@@ -93,7 +83,6 @@ public class OrderDetail implements SuperEntity{
                 ", customerEmail='" + customerEmail + '\'' +
                 ", discount=" + discount +
                 ", operatorEmail='" + operatorEmail + '\'' +
-                ", itemDetailDto=" + itemDetail +
                 '}';
     }
 }
