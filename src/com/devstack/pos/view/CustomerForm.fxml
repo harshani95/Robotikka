@@ -43,27 +43,27 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="29.0" layoutY="87.0" prefHeight="29.0" prefWidth="188.0" promptText="Email">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="29.0" layoutY="91.0" prefHeight="29.0" prefWidth="188.0" promptText="Email">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtSalary" labelFloat="true" layoutX="28.0" layoutY="136.0" prefHeight="29.0" prefWidth="188.0" promptText="Salary">
+      <JFXTextField fx:id="txtSalary" labelFloat="true" layoutX="28.0" layoutY="143.0" prefHeight="29.0" prefWidth="188.0" promptText="Salary">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="477.0" layoutY="86.0" prefHeight="29.0" prefWidth="172.0" promptText="Contact">
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="489.0" layoutY="90.0" prefHeight="29.0" prefWidth="172.0" promptText="Contact">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="260.0" layoutY="86.0" prefHeight="29.0" prefWidth="188.0" promptText="Name">
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="260.0" layoutY="91.0" prefHeight="29.0" prefWidth="188.0" promptText="Name">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnSaveUpdate" layoutX="339.0" layoutY="140.0" onAction="#btnSaveUpdateOnAction" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: #4b6584;" text="Save Customer" textFill="#f5ecec">
+      <JFXButton fx:id="btnSaveUpdate" layoutX="350.0" layoutY="149.0" onAction="#btnSaveUpdateOnAction" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: #4b6584;" text="Save Customer" textFill="#f5ecec">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -74,11 +74,11 @@
       <TableView fx:id="tblCustomer" layoutX="24.0" layoutY="260.0" prefHeight="241.0" prefWidth="736.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="colEmail" prefWidth="124.0" text="Email" />
-            <TableColumn fx:id="colName" prefWidth="141.0" text="Name" />
-            <TableColumn fx:id="colContact" prefWidth="112.0" text="Contact" />
-            <TableColumn fx:id="colSalary" prefWidth="115.0" text="Salary" />
-            <TableColumn fx:id="colOperate" prefWidth="128.0" text="Operate" />
+          <TableColumn fx:id="colEmail" prefWidth="145.0" text="Email" />
+            <TableColumn fx:id="colName" prefWidth="145.0" text="Name" />
+            <TableColumn fx:id="colContact" prefWidth="119.0" text="Contact" />
+            <TableColumn fx:id="colSalary" prefWidth="121.0" text="Salary" />
+            <TableColumn fx:id="colOperate" prefWidth="129.0" text="Operate" />
         </columns>
       </TableView>
       <TextField fx:id="txtSearch" layoutX="25.0" layoutY="216.0" prefHeight="25.0" prefWidth="697.0" promptText="Search here" />

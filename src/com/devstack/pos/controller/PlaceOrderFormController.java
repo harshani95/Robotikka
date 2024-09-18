@@ -199,7 +199,13 @@ public class PlaceOrderFormController {
     ObservableList<CartTm> tms= FXCollections.observableArrayList();
     public void addToCart(ActionEvent actionEvent) {
         int qty=Integer.parseInt(txtQty.getText());
-        double sellingPrice= Double.parseDouble(txtSellingPrice.getText());
+         /*if (customer.cardType.equals(CardType.GOLD.name())){
+            //
+        }*/
+        double discount = 250;//=>
+
+        double sellingPrice = (Double.parseDouble(txtSellingPrice.getText())-discount);
+
         double totalCost = qty*sellingPrice;
         Button btn = new Button("Remove");
 

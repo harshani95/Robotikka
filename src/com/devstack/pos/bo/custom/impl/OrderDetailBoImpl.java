@@ -18,8 +18,9 @@ import java.util.List;
 
 public class OrderDetailBoImpl implements OrderDetailBo {
 
-    OrderDetailDao dao = DaoFactory.getInstance().getDao(DaoType.ORDER_DETAIL);
+    OrderDetailDao orderDetailDao = DaoFactory.getInstance().getDao(DaoType.ORDER_DETAIL);
     ProductDetailDao productDetailDao = DaoFactory.getInstance().getDao(DaoType.PRODUCT_DETAIL);
+    ItemDetailDao itemDetailDao = DaoFactory.getInstance().getDao(DaoType.ITEM_DETAIL);
 
     @Override
     public boolean makeOrder(OrderDetailDto orderDetailDto) throws SQLException {
@@ -48,10 +49,10 @@ public class OrderDetailBoImpl implements OrderDetailBo {
         return false;
     }
 
-    private boolean saveItemDetails(List<ItemDetailDto> list, int orderCode) {
+    private boolean saveItemDetails(List<ItemDetailDto> list, int orderCode) throws SQLException, ClassNotFoundException {
         for (ItemDetailDto dto : list
         ) {
-            boolean isItemSaved = DetailDao.save(
+            boolean isItemSaved = itemDetailDao.save(
                     new ItemDetail(dto.getDetailCode(), orderCode,
                             dto.getQty(), dto.getDiscount(), dto.getAmount())
             );
@@ -66,12 +67,12 @@ public class OrderDetailBoImpl implements OrderDetailBo {
         return true;
     }
 
-    private boolean updateQty(String detailCode, int qty) {
-        return productDetailDao.manageQty(productCode, qty);
+    private boolean updateQty(String detailCode, int qty) throws SQLException, ClassNotFoundException {
+        return productDetailDao.manageQty(detailCode, qty);
     }
 
     private boolean saveOrder(OrderDetailDto orderDetailDto) throws SQLException, ClassNotFoundException {
-        return dao.save(
+        return orderDetailDao.save(
                 new OrderDetail(orderDetailDto.getCode(),
                         orderDetailDto.getIssuedDate(), orderDetailDto.getTotalCost(),
                         orderDetailDto.getCustomerEmail(),orderDetailDto.getDiscount(),

@@ -101,8 +101,6 @@ public class NewBatchFormController {
         }
 
 
-
-
     public void saveBatchOnAction(ActionEvent actionEvent) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         javax.imageio.ImageIO.write(bufferedImage, "png", baos);

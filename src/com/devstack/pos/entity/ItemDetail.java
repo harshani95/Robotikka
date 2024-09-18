@@ -18,6 +18,7 @@ public class ItemDetail implements SuperEntity{
         this.amount = amount;
     }
 
+
     public String getDetailCode() {
         return detailCode;
     }

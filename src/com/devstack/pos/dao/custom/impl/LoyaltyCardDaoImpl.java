@@ -8,11 +8,18 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LoyaltyCardDaoImpl implements LoyaltyCardDao {
+
+    @Override
+    public boolean save(LoyaltyCard loyaltyCard) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
     @Override
     public boolean update(LoyaltyCard loyaltyCard) throws SQLException, ClassNotFoundException {
         LoyaltyCard l = loyaltyCard;
         return CrudUtil.execute("INSERT INTO loyalty_card VALUES(?,?,?,?)",
-                loyaltyCard.getCode(), loyaltyCard.getCardType(), loyaltyCard.getBarcode(), loyaltyCard.getEmail());
+                loyaltyCard.getCode(), loyaltyCard.getCardType().name(),
+                loyaltyCard.getBarcode(), loyaltyCard.getEmail());
     }
 
     @Override
