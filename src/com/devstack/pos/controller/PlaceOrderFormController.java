@@ -143,12 +143,40 @@ public class PlaceOrderFormController {
                 qty,
                 totalCost,
                 btn);
-        tms.add(tm);
 
+        btn.setOnAction((e) -> {
+            tms.remove(tm);
+            tblCart.refresh();
+            setTotal();
+        });
+
+        tms.add(tm);
+        clear();
 
         tblCart.setItems(tms);
+        setTotal();
     }
 
+    private void setTotal() {
+        double total = 0;
+        for (CartTm tm : tms
+        ) {
+            total += tm.getTotalCost();
+        }
+        txtTotal.setText(total + " /=");
+    }
+
+    private void clear() {
+        txtDescription.clear();
+        txtSellingPrice.clear();
+        txtDiscount.clear();
+        txtShowPrice.clear();
+        txtQtyOnHand.clear();
+        txtBuyingPrice.clear();
+        txtQty.clear();
+        txtBarcode.clear();
+        txtBarcode.requestFocus();
+    }
 
     private void setUi(String url, boolean state) throws IOException {
         Stage stage = null;
